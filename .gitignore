@@ -1,0 +1,18 @@
+# IDE settings
+/.idea
+
+# Node modules
+/node_modules
+
+# Composer Packages
+/vendor
+
+# Cache
+/cache/*
+
+# Environment files
+.env
+
+# Build files
+/public/fonts
+/public/styles

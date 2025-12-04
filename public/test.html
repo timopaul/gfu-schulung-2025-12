@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles/old.css">
+
+    <title>GFU Schulung PHP Kompakt</title>
+</head>
+<body>
+    <h1>Überschrift 1</h1>
+    <p>Lorem ipsum dolor sit amet, consetetur sadipscing <strong hidden>elitr</strong>, sed diam nonumy eirmod tempor invidunt ut labore et
+        dolore magna <em>aliquyam</em> erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+        clita kasd gubergren, no sea takimata sanctus est <del>Lorem ipsum dolor</del> sit amet. Lorem ipsum dolor sit amet,
+        consetetur sadipscing elitr, sed diam <a href="https://google.com" target="_blank">nonumy</a> eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+        sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+        takimata sanctus est Lorem ipsum dolor sit amet.<br />
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+        diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+        accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+        dolor sit amet.
+    </p>
+    <h2>Überschrift 2</h2>
+    <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu
+        feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
+        delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+        sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+    </p>
+    <p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea
+        commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat,
+        vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit
+        praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+    </p>
+
+    <h3>Lists</h3>
+    <ul>
+        <li>first list item</li>
+        <li>
+            second list item
+            <ol>
+                <li>first subitem</li>
+                <li>second subitem</li>
+            </ol>
+        </li>
+        <li>third list item</li>
+    </ul>
+
+    <ol>
+        <li>
+            first
+            <ul>
+                <li>one</li>
+                <li>two</li>
+                <li>three</li>
+            </ul>
+        </li>
+        <li>
+            second
+            <ol>
+                <li>foo</li>
+                <li>bar</li>
+            </ol>
+        </li>
+        <li>third</li>
+    </ol>
+
+    <table>
+        <tr>
+            <td>eins.eins</td>
+            <td>eins.zwei</td>
+            <td>eins.drei</td>
+        </tr>
+        <tr>
+            <td>zwei.ens</td>
+            <td>a lot of content</td>
+            <td>zwei.drei</td>
+        </tr>
+    </table>
+
+    <h3>Forms</h3>
+    <form action="" method="post">
+        <table>
+            <tbody>
+                <tr>
+                    <td><label for="name">Name:</label></td>
+                    <td><input type="text" name="name" id="name" placeholder="Dein Name" required></td>
+                </tr>
+                <tr>
+                    <td><label for="email">E-Mail</label></td>
+                    <td><input type="email" name="email" id="email"></td>
+                </tr>
+                <tr>
+                    <td><label for="age">Alter:</label></td>
+                    <td><input type="number" name="age" id="age" min="1" max="120"></td>
+                </tr>
+                <tr>
+                    <td><label for="birthdate">Gaburtsdatum:</label></td>
+                    <td><input type="date" name="birthdate" id="birthdate"></td>
+                </tr>
+
+                <tr>
+                    <td><label for="message">Nachricht</label></td>
+                    <td>
+                        <textarea name="message" id="message"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label for="gender">Geschlecht:</label></td>
+                    <td>
+                        <input type="radio" name="gender" id="gender" value="f"><weiblich></weiblich>
+                        <input type="radio" name="gender" value="m">männlich
+                        <input type="radio" name="gender" value="x">non-binär
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label>Wie können wir dich erreichen?</label></td>
+                    <td>
+                        <input type="checkbox" name="phone" value="phone" id="phone"> <label for="phone">Telefon</label><br />
+                        <input type="checkbox" name="mail" value="mail" id="mail"> <label for="mail">E-Mail</label><br />
+                        <input type="checkbox" name="sms" value="sms" id="sms"> <label for="sms">SMS</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label for="size">Konfektionsgröße</label></td>
+                    <td>
+                        <select name="size" id="size" required>
+                            <option value=""></option>
+                            <option value="xs">XS</option>
+                            <option value="s">S</option>
+                            <option value="m">M</option>
+                            <option value="l">L</option>
+                            <option value="xl">XL</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <button type="submit">Klick <strong>mich</strong>!</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="Absenden">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </form>
+
+</body>
+</html>

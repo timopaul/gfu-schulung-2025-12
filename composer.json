@@ -1,0 +1,6 @@
+{
+    "require": {
+        "smarty/smarty": "^5.7",
+        "vlucas/phpdotenv": "^5.6"
+    }
+}

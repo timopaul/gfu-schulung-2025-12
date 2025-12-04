@@ -1,0 +1,15 @@
+// import Bootstrap SCSS
+@use "../../node_modules/bootstrap/scss/bootstrap" with (
+  $body-bg: #ffffff,
+  $primary: #2a9d8f,
+  $secondary: #e76f51
+);
+
+.btn-primary,
+.btn-primary:hover,
+.btn-outline-primary:hover {
+  color: #ffffff;
+}
+
+// Import Bootstrap Icons CSS so its rules (and font URLs) are included in the compiled CSS
+@import "../../node_modules/bootstrap-icons/font/bootstrap-icons.css";

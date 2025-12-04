@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "bootstrap-icons": "^1.13.1"
+  },
+  "scripts": {
+    "build:css": "sass assets/styles/custom.scss public/styles/layout.css --style=compressed",
+    "copy:js": "npx copyfiles -f node_modules/bootstrap/dist/js/bootstrap.bundle.min.js public/styles",
+    "copy:icons": "npx copyfiles -f node_modules/bootstrap-icons/font/* public/fonts",
+    "build": "npm run build:css && npm run copy:js && npm run copy:icons",
+    "watch:css": "sass --watch assets/styles/custom.scss:public/styles/layout.css --style=compressed"
+  }
+}
