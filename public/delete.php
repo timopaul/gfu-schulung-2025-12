@@ -5,6 +5,7 @@ declare(strict_types=1);
 const BASE_PATH = __DIR__ . '/../';
 
 require_once BASE_PATH . 'vendor/autoload.php';
+require_once BASE_PATH . 'src/autoload.php';
 require_once BASE_PATH . 'src/functions.php';
 
 // load .env vars

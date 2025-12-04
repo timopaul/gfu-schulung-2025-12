@@ -2,12 +2,10 @@
 
 declare(strict_types=1);
 
+use App\Manager\DatabaseManager;
+
 function getArticles(): array
 {
-    $config = require __DIR__ . '/../config/database.php';
-
-    $con = mysqli_connect($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
-
     $sql = "SELECT
                 a.id,
                 au.name AS author,
@@ -18,53 +16,37 @@ function getArticles(): array
                 LEFT JOIN authors au ON a.author_id = au.id
             ";
 
-    $result = mysqli_query($con, $sql);
-
-    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return DatabaseManager::getInstance()->fetchAll($sql);
 }
 
 function getArticleById(int $id): array|null
 {
-    $config = require __DIR__ . '/../config/database.php';
-
-    $con = mysqli_connect($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
-
     $sql = "SELECT *
             FROM articles
             WHERE id = {$id}
             ";
 
-    $result = mysqli_query($con, $sql);
-
-    return mysqli_fetch_assoc($result);
+    return DatabaseManager::getInstance()->fetch($sql);
 }
 
 function getAuthors(): array
 {
-    $config = require __DIR__ . '/../config/database.php';
-
-    $con = mysqli_connect($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
-
     $sql = "SELECT
                 id,
                 name
             FROM authors
             ";
 
-    $result = mysqli_query($con, $sql);
-
-    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return DatabaseManager::getInstance()->fetchAll($sql);
 }
 
 function insertArticle(string $title, string $text, int $authorId, string $status): bool
 {
-    $config = require __DIR__ . '/../config/database.php';
+    $db = DatabaseManager::getInstance();
 
-    $con = mysqli_connect($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
-
-    $titleEscaped = mysqli_real_escape_string($con, $title);
-    $textEscaped = mysqli_real_escape_string($con, $text);
-    $statusEscaped = mysqli_real_escape_string($con, $status);
+    $titleEscaped = $db->prepareString($title);
+    $textEscaped = $db->prepareString($text);
+    $statusEscaped = $db->prepareString($status);
 
     $sql = "INSERT INTO articles
             SET title = '{$titleEscaped}',
@@ -72,18 +54,16 @@ function insertArticle(string $title, string $text, int $authorId, string $statu
                 author_id = {$authorId},
                 status = '{$statusEscaped}'";
 
-    return mysqli_query($con, $sql);
+    return $db->execute($sql);
 }
 
 function updateArticle(int $id, string $title, string $text, int $authorId, string $status): bool
 {
-    $config = require __DIR__ . '/../config/database.php';
+    $db = DatabaseManager::getInstance();
 
-    $con = mysqli_connect($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
-
-    $titleEscaped = mysqli_real_escape_string($con, $title);
-    $textEscaped = mysqli_real_escape_string($con, $text);
-    $statusEscaped = mysqli_real_escape_string($con, $status);
+    $titleEscaped = $db->prepareString($title);
+    $textEscaped = $db->prepareString($text);
+    $statusEscaped = $db->prepareString($status);
 
     $sql = "UPDATE articles
             SET title = '{$titleEscaped}',
@@ -92,19 +72,15 @@ function updateArticle(int $id, string $title, string $text, int $authorId, stri
                 status = '{$statusEscaped}'
             WHERE id = {$id}";
 
-    return mysqli_query($con, $sql);
+    return $db->execute($sql);
 }
 
 function deleteArticle(int $id): bool
 {
-    $config = require __DIR__ . '/../config/database.php';
-
-    $con = mysqli_connect($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
-
     $sql = "DELETE FROM articles
             WHERE id = {$id}";
 
-    return mysqli_query($con, $sql);
+    return DatabaseManager::getInstance()->execute($sql);
 }
 
 function isPostRequest(): bool
