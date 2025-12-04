@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Manager\ArticleManager;
+
 const BASE_PATH = __DIR__ . '/../';
 
 require_once BASE_PATH . 'vendor/autoload.php';
@@ -17,13 +19,13 @@ if ( ! filter_has_var(INPUT_GET, 'id')) {
 }
 
 $id = (int) filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-$article = getArticleById($id);
+$article = ArticleManager::getInstance()->getOne($id);
 
 if (null === $article) {
     redirectTo('index.php?error=2');
 }
 
-if (deleteArticle($id)) {
+if (ArticleManager::getInstance()->delete($id)) {
     redirectTo('index.php?success=1');
 } else {
     redirectTo('index.php?error=1');

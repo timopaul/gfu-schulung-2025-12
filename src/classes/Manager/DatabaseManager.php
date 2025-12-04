@@ -2,24 +2,20 @@
 
 namespace App\Manager;
 
+use App\Traits\IsSingleton;
 use mysqli;
 use mysqli_result;
 use RuntimeException;
 
 class DatabaseManager
 {
-    private static self $_instance;
+    use IsSingleton;
 
     private mysqli $connection;
 
     public function __construct()
     {
         $this->connect();
-    }
-
-    public static function getInstance(): self
-    {
-        return self::$_instance ??= new self();
     }
 
     public function __destruct()

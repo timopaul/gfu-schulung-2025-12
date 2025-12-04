@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Manager\ArticleManager;
+use App\Manager\AuthorManager;
 use Smarty\Smarty;
 use Smarty\Exception as SmartyException;
 
@@ -24,7 +26,7 @@ $smarty->setCacheDir(BASE_PATH . 'cache/templates');
 if (filter_has_var(INPUT_GET, 'id')) {
     $id = (int) filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
-    $article = getArticleById($id);
+    $article = ArticleManager::getInstance()->getOne($id);
 
     $smarty->assign('values', $article);
 }
@@ -56,11 +58,11 @@ if (isPostRequest()) {
 
         if ($isEditForm) {
             $id = (int) filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
-            if (updateArticle($id, $title, $text, (int) $authorId, $status)) {
+            if (ArticleManager::getInstance()->update($id, $title, $text, (int) $authorId, $status)) {
                 redirectTo('index.php');
             }
             $errors['general'] = 'Beim Aktualisieren des Artikels ist ein Fehler aufgetreten.';
-        } elseif (insertArticle($title, $text, (int) $authorId, $status)) {
+        } elseif (ArticleManager::getInstance()->insert($title, $text, (int) $authorId, $status)) {
             redirectTo('index.php');
         }
         $errors['general'] = 'Beim Speichern des Artikels ist ein Fehler aufgetreten.';
@@ -79,7 +81,7 @@ if (isPostRequest()) {
     $smarty->assign('errors', $errors);
 }
 
-$authors = getAuthors();
+$authors = AuthorManager::getInstance()->getAll();
 $smarty->assign('authors', $authors);
 
 try {

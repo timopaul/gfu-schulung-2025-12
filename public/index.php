@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Manager\ArticleManager;
 use Smarty\Smarty;
 use Smarty\Exception as SmartyException;
 
@@ -20,7 +21,7 @@ $smarty->setTemplateDir(BASE_PATH . 'templates/default');
 $smarty->setCompileDir(BASE_PATH . 'cache/compile');
 $smarty->setCacheDir(BASE_PATH . 'cache/templates');
 
-$articles = getArticles();
+$articles = ArticleManager::getInstance()->getAll();
 
 $smarty->assign('articles', $articles);
 
