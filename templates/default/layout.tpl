@@ -2,8 +2,8 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="styles/layout.css">
-    <script src="styles/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="{$smarty.env.PROJECT_URL}/styles/layout.css">
+    <script src="{$smarty.env.PROJECT_URL}/styles/bootstrap.bundle.min.js"></script>
 
     <title>{block name="title"}{/block}</title>
 </head>

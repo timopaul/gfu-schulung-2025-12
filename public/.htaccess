@@ -1,0 +1,12 @@
+# Alle Requests zur index.php umleiten (außer existierende Dateien)
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Wenn die Datei oder das Verzeichnis existiert, nicht umleiten
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Alle anderen Requests zur index.php umleiten
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
+
