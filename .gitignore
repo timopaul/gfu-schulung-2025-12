@@ -9,6 +9,7 @@
 
 # Cache
 /cache/*
+/.php-cs-fixer.cache
 
 # Environment files
 .env
