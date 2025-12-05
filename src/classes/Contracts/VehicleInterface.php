@@ -12,4 +12,3 @@ interface VehicleInterface
 
     public function info(): string;
 }
-

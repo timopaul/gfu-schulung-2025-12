@@ -8,19 +8,16 @@ use App\Traits\IsSingleton;
 
 class AuthorManager
 {
-    use isSingleton;
+    use IsSingleton;
 
     public function getAll(): array
     {
-        $sql = "SELECT
+        $sql = 'SELECT
                     id,
                     name
                 FROM authors
-                ";
+                ';
 
         return DatabaseManager::getInstance()->fetchAll($sql);
     }
-
-
-
 }

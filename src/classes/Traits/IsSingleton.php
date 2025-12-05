@@ -10,5 +10,4 @@ trait IsSingleton
     {
         return self::$_instance ??= new self();
     }
-
 }

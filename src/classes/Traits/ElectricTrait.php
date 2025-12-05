@@ -23,4 +23,3 @@ trait ElectricTrait
         return ' mit einer Batteriekapazität von ' . $this->getBatteryCapacity() . ' kWh';
     }
 }
-

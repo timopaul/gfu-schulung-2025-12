@@ -12,7 +12,7 @@ class ArticleManager
 
     public function getAll(): array
     {
-        $sql = "SELECT
+        $sql = 'SELECT
                     a.id,
                     au.name AS author,
                     a.title,
@@ -20,7 +20,7 @@ class ArticleManager
                     a.status
                 FROM articles a
                     LEFT JOIN authors au ON a.author_id = au.id
-                ";
+                ';
 
         return DatabaseManager::getInstance()->fetchAll($sql);
     }
@@ -29,8 +29,7 @@ class ArticleManager
     {
         $sql = "SELECT *
                 FROM articles
-                WHERE id = {$id}
-                ";
+                WHERE id = {$id}";
 
         return DatabaseManager::getInstance()->fetch($sql);
     }
@@ -77,5 +76,4 @@ class ArticleManager
 
         return DatabaseManager::getInstance()->execute($sql);
     }
-
 }

@@ -10,4 +10,3 @@ interface ElectricInterface
 
     public function getBatteryCapacity(): int;
 }
-

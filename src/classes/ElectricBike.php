@@ -18,6 +18,6 @@ class ElectricBike extends Bike implements ElectricInterface
 
     public function info(): string
     {
-        return parent::info() . ' und '  . $this->electricInfo();
+        return parent::info() . ' und ' . $this->electricInfo();
     }
 }

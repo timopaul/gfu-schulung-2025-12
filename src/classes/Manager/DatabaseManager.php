@@ -3,15 +3,12 @@
 namespace App\Manager;
 
 use App\Traits\IsSingleton;
-use mysqli;
-use mysqli_result;
-use RuntimeException;
 
 class DatabaseManager
 {
     use IsSingleton;
 
-    private mysqli $connection;
+    private \mysqli $connection;
 
     public function __construct()
     {
@@ -23,24 +20,7 @@ class DatabaseManager
         mysqli_close($this->connection);
     }
 
-    private function connect(): void
-    {
-        $config = require __DIR__ . '/../../../config/database.php';
-
-        $this->connection = mysqli_connect(
-            $config['db_host'],
-            $config['db_user'],
-            $config['db_pass'],
-            $config['db_name'],
-        );
-
-        $error = mysqli_connect_error();
-        if (null !== $error) {
-            throw new RuntimeException('Datenbankverbindung fehlgeschlagen: ' . $error);
-        }
-    }
-
-    public function getConnection(): mysqli
+    public function getConnection(): \mysqli
     {
         return $this->connection;
     }
@@ -59,7 +39,7 @@ class DatabaseManager
         return mysqli_fetch_assoc($result);
     }
 
-    public function execute(string $query): mysqli_result|bool
+    public function execute(string $query): bool|\mysqli_result
     {
         return mysqli_query($this->getConnection(), $query);
     }
@@ -69,4 +49,20 @@ class DatabaseManager
         return mysqli_real_escape_string($this->getConnection(), $string);
     }
 
+    private function connect(): void
+    {
+        $config = require __DIR__ . '/../../../config/database.php';
+
+        $this->connection = mysqli_connect(
+            $config['db_host'],
+            $config['db_user'],
+            $config['db_pass'],
+            $config['db_name'],
+        );
+
+        $error = mysqli_connect_error();
+        if (null !== $error) {
+            throw new \RuntimeException('Datenbankverbindung fehlgeschlagen: ' . $error);
+        }
+    }
 }
