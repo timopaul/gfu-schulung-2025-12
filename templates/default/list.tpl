@@ -22,7 +22,13 @@
                 <td>{$article.id}</td>
                 <td>{$article.title}</td>
                 <td class="text-nowrap">{$article.author}</td>
-                <td>{$article.status}</td>
+                <td>
+                    {foreach App\Enums\Status::cases() as $status}
+                        {if $status->name === $article.status}
+                            <span class="badge bg-primary">{$status->value}</span>
+                        {/if}
+                    {/foreach}
+                </td>
                 <td class="actions">
                     <div class="btn-group">
                         <a class="btn btn-outline-primary text-nowrap"

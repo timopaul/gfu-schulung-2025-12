@@ -74,14 +74,17 @@
 
                 <div class="mb-3">
                     <label class="form-label" for="status">Status:</label>
-                    <select class="form-select" id="status" name="status">
-                        <option value="draft"
-                                {(isset($values) && 'draft' == $values.status) ? 'selected' : ''}
-                        >Entwurf</option>
-                        <option value="published"
-                                {(isset($values) && 'published' == $values.status) ? 'selected' : ''}
-                        >Veröffentlicht</option>
+                    <select class="form-select{isset($errors) && isset($errors.status) ? ' is-invalid' : ''}" id="status" name="status">
+                        <option value="" class="d-none">-- Bitte wähle einen Status --</option>
+                        {foreach App\Enums\Status::cases() as $case}
+                            <option value="{$case->name}"
+                                    {isset($values.status) && $values.status === $case->name ? 'selected' : ''}
+                            >{$case->value}</option>
+                        {/foreach}
                     </select>
+                    {if isset($errors) && isset($errors.status)}
+                        <div class="invalid-feedback">{$errors.status}</div>
+                    {/if}
                 </div>
 
                 <div class="mb-3 text-end">

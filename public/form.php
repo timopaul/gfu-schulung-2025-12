@@ -2,16 +2,20 @@
 
 declare(strict_types=1);
 
+use App\Enums\Status;
 use App\Manager\ArticleManager;
 use App\Manager\AuthorManager;
-use Smarty\Smarty;
 use Smarty\Exception as SmartyException;
+use Smarty\Smarty;
 
 const BASE_PATH = __DIR__ . '/../';
 
 require_once BASE_PATH . 'vendor/autoload.php';
+
 require_once BASE_PATH . 'src/autoload.php';
+
 require_once BASE_PATH . 'src/functions.php';
+
 require_once BASE_PATH . 'src/constants.php';
 
 // load .env vars
@@ -32,7 +36,6 @@ if (filter_has_var(INPUT_GET, 'id')) {
 }
 
 if (isPostRequest()) {
-
     $isEditForm = filter_has_var(INPUT_POST, 'id');
 
     $errors = [];
@@ -48,14 +51,26 @@ if (isPostRequest()) {
     }
 
     $authorId = $_POST['author_id'] ?? '';
-    if ('' === trim($authorId) || ! is_numeric($authorId)) {
+    if ('' === trim($authorId) || !is_numeric($authorId)) {
         $errors['author_id'] = 'Es muss ein gültiger Autor ausgewählt werden.';
     }
 
-    $status = $_POST['status'] ?? 'draft';
+    $status = $_POST['status'] ?? Status::draft->name;
+
+    $cases = Status::cases();
+    $isValid = false;
+    foreach ($cases as $case) {
+        if ($case->name === $status) {
+            $isValid = true;
+
+            break;
+        }
+    }
+    if (false === $isValid) {
+        $errors['status'] = 'Es muss ein gültiger Status ausgewählt werden.';
+    }
 
     if (0 === count($errors)) {
-
         if ($isEditForm) {
             $id = (int) filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
             if (ArticleManager::getInstance()->update($id, $title, $text, (int) $authorId, $status)) {
@@ -89,9 +104,8 @@ try {
 } catch (SmartyException $e) {
     if ('development' == $_ENV['ENVIRONMENT']) {
         throw $e;
-    } else {
-        echo 'Es ist ein Fehler aufgetreten.';
     }
+    echo 'Es ist ein Fehler aufgetreten.';
 } catch (Exception $e) {
     echo 'Es ist ein unerwarteter Fehler aufgetreten.';
 }
