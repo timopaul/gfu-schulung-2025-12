@@ -20,4 +20,15 @@ class AuthorManager
 
         return DatabaseManager::getInstance()->fetchAll($sql);
     }
+
+    public function getOne(int $id): array|null
+    {
+        $sql = "SELECT
+                    id,
+                    name
+                FROM authors
+                WHERE id = {$id}";
+
+        return DatabaseManager::getInstance()->fetch($sql);
+    }
 }
