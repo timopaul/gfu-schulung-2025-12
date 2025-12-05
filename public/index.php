@@ -23,6 +23,7 @@ $router = new Router();
 
 // Routes definieren
 $router->get('/', HomeController::class, 'index');
+$router->get('/article/{id}', ArticleController::class, 'view');
 $router->get('/article/create', ArticleController::class, 'create');
 $router->post('/article/create', ArticleController::class, 'create');
 $router->get('/article/edit/{id}', ArticleController::class, 'edit');

@@ -133,5 +133,24 @@ class ArticleController extends BaseController
             'form_action' => $_ENV['PROJECT_URL'] . $formAction,
         ]);
     }
+
+    function view(string $id): void
+    {
+        $articleId = (int) $id;
+        $article = ArticleManager::getInstance()->getOne($articleId);
+
+        if (null === $article) {
+            $this->redirect('/?error=2');
+            return;
+        }
+
+        $author = AuthorManager::getInstance()->getOne((int) $article['author_id']);
+
+        $this->render('view.tpl', [
+            'article' => $article,
+            'paragraphs' => explode("\n", $article['text']),
+            'author' => $author,
+        ]);
+    }
 }
 
