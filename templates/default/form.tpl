@@ -31,7 +31,7 @@
                 </div>
             {/if}
 
-            <form action="form.php" method="POST">
+            <form action="{$form_action}" method="POST">
 
                 {if (isset($values) && isset($values.id))}
                     <input type="hidden" name="id" value="{$values.id}">

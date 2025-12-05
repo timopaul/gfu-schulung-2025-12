@@ -32,11 +32,11 @@
                 <td class="actions">
                     <div class="btn-group">
                         <a class="btn btn-outline-primary text-nowrap"
-                           href="article.php?id={$article.id}">
+                           href="{$smarty.env.PROJECT_URL}/article/view/{$article.id}">
                             <i class="bi bi-eye"></i> Ansehen
                         </a>
                         <a class="btn btn-primary text-nowrap"
-                           href="form.php?id={$article.id}">
+                           href="{$smarty.env.PROJECT_URL}/article/edit/{$article.id}">
                             <i class="bi bi-pencil"></i> Bearbeiten
                         </a>
 
